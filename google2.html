@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google</title>
+    <style>
+        * {
+            margin: 0px;
+            overflow: hidden;
+        }
+        body {
+            background-color: var(--var6);
+        }
+        a {
+            text-decoration: none;
+            color: rgb(15, 14, 14);
+        }
+        
+        
+        .list {
+            display: none;
+        }
+        .drop-down {
+            color: rgb(232, 253, 253);
+        }
+        
+        .circle {
+            height: 40px;
+            width: 40px;
+            margin: 20px;
+            border-radius: 50%;
+            background-color: var(--var1);
+        }
+        
+        h3 span {
+            color: rgb(255, 0, 0);
+        }
+    </style>
+</head>
+<body>
+    <nav style="height: var(--var20); color:var(--var6);display: flex; gap: 20px; background-color: var(--var2); justify-content: end;align-items: center;">
+        <a href="https://gmail.com" target="_blank">
+            Gmail
+        </a>
+        <a href="https:photos.google.com" target="_blank">
+            Images
+        </a>
+
+        </button>
+        <div class="circle" id="circle"></div>
+    </nav>
+    <div style="display: flex; justify-content: center; padding: 20vh 0vh 5vh 0;">
+        <h3 style="font-size: 10vh; color: aliceblue; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;">
+            <span style="color: var(--var1);">G</span>
+            <span style="color: var(--var2);">O</span>
+            <span style="color: var(--var3);">O</span>
+            <span style="color: var(--var4);">G</span>
+            <span style="color: var(--var5);">L</span>
+            <span style="color: var(--var1);">E</span>
+        </h3>
+    </div>
+    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+        <form action="https://www.google.com/search" method="get">
+            <input 
+                type="search"
+                name="q" id="search"
+                style="
+                    width: var(--var18);
+                    border-radius: 30px;
+                    height: var(--var19);
+                    padding: 20px; 
+                    font-size: 3vh;   
+                    color: rgb(58, 12, 12);
+                "
+                onfocus=change()
+                onblur="change2()"
+            >
+            <img src="" alt="">
+        </form>
+    </div>
+
+    <script>
+        function getRandomColor() {
+            return Math.floor(Math.random() * 256);
+        }
+
+        function changeElementColor() {
+            document.documentElement.style.setProperty('--var1', "rgb(" + getRandomColor() + "," + getRandomColor() + "," + getRandomColor() + ")");
+            document.documentElement.style.setProperty('--var2', "rgb(" + getRandomColor() + "," + getRandomColor() + "," + getRandomColor() + ")");
+            document.documentElement.style.setProperty('--var3', "rgb(" + getRandomColor() + "," + getRandomColor() + "," + getRandomColor() + ")");
+            document.documentElement.style.setProperty('--var4', "rgb(" + getRandomColor() + "," + getRandomColor() + "," + getRandomColor() + ")");
+            document.documentElement.style.setProperty('--var5', "rgb(" + getRandomColor() + "," + getRandomColor() + "," + getRandomColor() + ")");
+            document.documentElement.style.setProperty('--var6', "rgb(" + getRandomColor() + "," + getRandomColor() + "," + getRandomColor() + ")");
+       
+        }
+        function getRandomInRange(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function setRandomValueToVariable(variableName, minValue, maxValue) {
+            const randomValue = getRandomInRange(minValue, maxValue);
+            document.documentElement.style.setProperty('--' + variableName, randomValue + 'px');
+        }
+
+        setRandomValueToVariable('var18', 160, 500);
+        setRandomValueToVariable('var19', 30, 60);
+        setRandomValueToVariable('var20',70,100 );
+        
+        changeElementColor();
+    </script>
+</body>
+</html>

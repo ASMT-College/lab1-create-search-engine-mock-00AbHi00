@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Google</title>
+</head>
+<style>
+    *{
+        margin: 0px;
+        overflow-x: hidden;
+    }
+    body{
+        background-color: rgb(91, 90, 90);
+    }
+    a{
+        text-decoration: none;
+        color: white;
+    }
+    
+    .drop-down:hover .list{
+        color: aqua;
+        display: block;
+    }
+    .list{
+        display: none;
+    }
+    .drop-down{
+        color: rgb(232, 253, 253);
+    }
+    .ded{
+        color: rgb(34, 29, 38);
+        margin: 20px;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: 2vh;
+    }
+    .ded:hover{
+        background-color: lightblue;
+    }
+    #canvas{
+        display: block;
+
+    }
+    .search-box {
+    position: relative;
+    
+    
+    
+  }
+    
+</style>
+<body>
+    <nav style="color:white;display: flex; gap: 20px; background-color: rgba(0, 0, 0,0.9); justify-content: end;align-items: center;">
+        <a href="https://gmail.com" target="_blank">
+            Gmail
+        </a>
+        <a href="https:photos.google.com" target="_blank">
+            Images
+        </a>
+        <div class="search-box">
+       </div>
+        <button class="drop-down" style="cursor:pointer; border: none; background-color: rgba(0, 0, 0,0); ">
+            <div>:: :::</div>
+            <div>:: : ::</div>
+            <div>: ::: :</div>
+            <div class="list">
+                <li>Photo</li>
+                <li>Drive</li>
+                <li>Color</li>
+                <li>Head</li>
+            </div>
+
+        </button>
+        <div class="circle" style="height: 40px; width: 40px;margin: 20px; background-color: grey; border-radius: 50%;">
+
+        </div>
+    </nav>
+<div style="display: flex; justify-content: center; padding: 20vh 0vh 5vh 0;">
+    <h3 style="font-size: 10vh; color: aliceblue; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;">
+        Google    
+    </div>
+</div>
+    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+        <form action="https://www.google.com/search" method="get" target="_blank">
+
+            <input 
+            type="search"
+            name="q" id="search"
+            placeholder="Search Google or type a URL"
+            style=
+            "
+            width: 70vw;
+            border-radius: 30px;
+            height: 50px;
+            background-color: rgb(91, 90, 90);
+            padding: 20px; 
+            font-size: 3vh;   
+            color: white;
+            "
+            onfocus=change()
+            onblur="change2()"
+            >
+            
+            <img src="" alt="">
+            <section>
+                <button class="ded" type="submit">
+                    Google Search
+                </button>
+                <button class="ded">
+                    I'm Feeling lucky
+                </button>
+            </section>
+        </form>
+        
+        <section>
+            <canvas id="canvas">
+
+            </canvas>
+        </section>
+    </div>
+
+    <div id="modal" style="
+    display:none;
+    top:5vh;
+    right:10vw;
+    position: absolute;
+      background-color:rgba(0, 0, 0,0.9);
+      padding: 20px;">
+       <div style="display: inline;">
+       <a href="#"> One
+        </a>
+       </div>
+        <div style="display: inline;">
+            <a href="#"> Two
+            </a>
+        </div>
+        <div style="display: inline-block;">
+            <a href="#"> three
+            </a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/examples/js/controls/OrbitControls.js"></script>
+    
+    <script>
+        function change()
+        {
+            document.getElementById("search").style.backgroundColor= "rgb(0,0,20,0.2)";
+        }
+        function change2()
+        {
+            document.getElementById("search").style.backgroundColor= "rgb(91, 90, 90)";
+        }
+      
+        function three() {
+    const canvas = document.getElementById('canvas');
+    var webgl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+
+    // Set up the scene
+    const scene = new THREE.Scene();
+
+    // Set up the camera
+    const camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.09, 1000);
+    camera.position.set(0.24, 1.42, 1.5); // Set camera position based on the provided global coordinates
+    camera.lookAt(0.24, 1.42, 0.71); // Make the camera look at the object's position
+
+    
+    // Set up the renderer
+    const renderer = new THREE.WebGLRenderer({ canvas: canvas });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Load the earth model
+    const loader = new THREE.GLTFLoader();
+    loader.load('earth2.glb', (gltf) => {
+        scene.add(gltf.scene);
+    });
+    // Add a directional light
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+    directionalLight.position.set(0, 1, 0); // Set light position (x, y, z)
+    scene.add(directionalLight);
+
+
+    // Set up animation loop
+    function animate() {
+    requestAnimationFrame(animate);
+
+    
+
+    // Rotate the light around the object
+    const radius = 2; // Radius of the orbit
+    const speed = 0.0005; // Speed of rotation
+    const angle = Date.now() * speed; // Calculate the angle based on time
+
+    // Calculate new position of the light
+    const x = radius * Math.cos(angle);
+    const z = radius * Math.sin(angle);
+    
+    // Update the light's position
+    directionalLight.position.set(x, 2, z); // Adjust the y-coordinate as needed
+
+    camera.position.z+=0.01
+    renderer.render(scene, camera);
+}
+
+
+    animate();
+}
+
+three(); // Call the function to initialize the scene
+window.addEventListener('resize', () => {
+    // Update camera aspect ratio
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    
+    // Update renderer size
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    
+    // Adjust the viewport size
+    const aspect = window.innerWidth / window.innerHeight;
+    const height = camera.position.z * Math.tan(THREE.MathUtils.degToRad(camera.fov) / 2) * 2;
+    const width = height * aspect;
+    renderer.setViewport((window.innerWidth - width) / 2, (window.innerHeight - height) / 2, width, height);
+});
+
+
+
+    </script>
+</body>
+</html>
